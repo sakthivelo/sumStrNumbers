@@ -10,14 +10,20 @@ function sumStrNumbers(num){
     }
     
     const numArr = num.split(delim);
+    let negativeInput = [];
 
     const sum = numArr.reduce((total, number) => {
         const parsedNum = parseInt(number);
         if (isNaN(parsedNum)) return total;
         
+        if(parsedNum < 0){
+            negativeInput.push(parsedNum)
+        }
         return total + parsedNum;
     }, 0);
-    
+    if(negativeInput.length > 0){
+        throw new  Error(`negative numbers should not allowed ${negativeInput.join(",")}`);
+    }
     return sum;
 }
 console.log(sumStrNumbers(""),sumStrNumbers("1"),sumStrNumbers("1,3"),sumStrNumbers("1\n3,4"),sumStrNumbers("1\n3;4"))
@@ -27,6 +33,11 @@ console.assert(sumStrNumbers("1,2") === 3, 'Test Failed: "1,2" should return 3')
 console.assert(sumStrNumbers("1\n3,4") === 8, 'Test Failed: "1\n3,4" should return 8');
 console.assert(sumStrNumbers("1\n3;4") === 8, 'Test Failed: "1\n3;4" should return 8');
 
+try{
+   console.log(sumStrNumbers("1,-4")); 
+} catch(e){
+    console.assert(e.message === "negative numbers not allowed -4", `Test Failed: "1,-4" should throw "negative numbers not allowed -4"`);
 
+}
 
 
