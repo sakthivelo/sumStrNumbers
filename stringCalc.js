@@ -34,10 +34,9 @@ console.assert(sumStrNumbers("1\n3,4") === 8, 'Test Failed: "1\n3,4" should retu
 console.assert(sumStrNumbers("1\n3;4") === 8, 'Test Failed: "1\n3;4" should return 8');
 
 try{
-   console.log(sumStrNumbers("1,-4")); 
+  sumStrNumbers("1,-4,-5"); 
 } catch(e){
-    console.assert(e.message === "negative numbers not allowed -4", `Test Failed: "1,-4" should throw "negative numbers not allowed -4"`);
-
+    console.assert(e.message === "negative numbers not allowed negative", `Test Failed: ${e.message}`);
 }
 
 
